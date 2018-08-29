@@ -1,8 +1,7 @@
  // eslint-disable-next-line
  import React, {Component} from 'react';
  import { Card, CardImg, CardImgOverlay, CardText, CardBody,CardTitle } from 'reactstrap';
-import DishDetail from './DishDetailComponent';
-
+ import {DishDetail} from './DishDetailComponent';
  
  
  class Menu extends Component{
@@ -10,17 +9,16 @@ import DishDetail from './DishDetailComponent';
          super(props);
          this.state = {
              selectedDish: null
-             
           }
-         
      }
  
      onDishSelect(dish){
-         this.setState({selectedDish: dish
-        });
+         this.setState({selectedDish: dish});
      }
  
      
+ 
+ 
      render(){
          const menu = this.props.dishes.map((dish) => {
              return (
@@ -31,7 +29,7 @@ import DishDetail from './DishDetailComponent';
                    <CardImgOverlay>
                        <CardTitle>{dish.name}</CardTitle>
                    </CardImgOverlay>
-                 </Card>                                
+                 </Card>
                </div>
              );
          });
@@ -41,11 +39,25 @@ import DishDetail from './DishDetailComponent';
                  <div className="row">
                      {menu}
                  </div>
-                 <DishDetail dish= {this.state.selectedDish}/>
-            </div>
+                 <div className="row">
+                   <div  className="col-12 col-md-5 m-1">
+                   {this.renderDish(this.state.selectedDish)}
+                   </div>
+                 </div>
+             </div>
          );
      }
  }
  
  
  export default Menu;
+***********
+
+ const comments = this.props.dish.comments.map((comment) => {
+    return (
+        <Media tag = "list">
+        <p>{this.props.dish.comment} </p>
+        <p>{this.props.dish.author}, {this.props.dish.date}</p>
+    </Media>
+    );
+});
