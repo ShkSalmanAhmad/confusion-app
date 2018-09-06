@@ -1,7 +1,7 @@
  // eslint-disable-next-line
  import React, {Component} from 'react';
  import { Card, CardImg, CardImgOverlay, CardTitle } from 'reactstrap';
-import DishDetail from './DishDetailComponent';
+
 
  
  
@@ -30,7 +30,7 @@ import DishDetail from './DishDetailComponent';
                  <div className="row">
                      {menu}
                  </div>
-                 <DishDetail dish= {this.state.selectedDish}/>
+                
             </div>
          );
      }
