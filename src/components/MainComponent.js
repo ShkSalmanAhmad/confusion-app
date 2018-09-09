@@ -9,6 +9,11 @@ import Contact from './ContactComponent';
 import { COMMENTS } from '../shared/comments';
 import { PROMOTIONS } from '../shared/promotions';
 import { LEADERS } from '../shared/leaders';
+import { Switch, Route } from 'react-router'
+import {
+  BrowserRouter as Router,
+  Redirect
+} from "react-router-dom";
 
 
 
@@ -41,12 +46,18 @@ class Main extends Component {
     }
     
     return (
-      <Switch>
-              <Route path='/home' component={HomePage} />
-              <Route exact path='/menu' component={() => <Menu dishes={this.state.dishes} />} />
-              <Redirect to="/home" />
-              <Route exact path='/contactus' component={Contact} />} />
-      </Switch>
+      <div>
+        <Header />
+        <Menu dishes={this.state.dishes} onClick={(dishId) => this.onDishSelect(dishId)} />
+        <DishDetail dish={this.state.dishes.filter((dish) => dish.id === this.state.selectedDish)[0]} />
+        <Switch>
+                <Route path='/home' component={HomePage} />
+                <Route exact path='/menu' component={() => <Menu dishes={this.state.dishes} />} />
+                <Redirect to="/home" />
+                <Route exact path='/contactus' component={Contact} />} />
+        </Switch>
+        <Footer />
+      </div>
     );
   }
 }
