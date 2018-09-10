@@ -1,21 +1,24 @@
  // eslint-disable-next-line
-
  import React from 'react';
+ import { Link } from 'react-router-dom';
  import { Card, CardImg, CardImgOverlay,
-     CardTitle } from 'reactstrap';
+    CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+
+
+    function RenderMenuItem ({dish, onClick}) {
+        return (
+            <Card>
+                <Link to={`/menu/${dish.id}`} >
+                    <CardImg width="100%" src={dish.image} alt={dish.name} />
+                    <CardImgOverlay>
+                        <CardTitle>{dish.name}</CardTitle>
+                    </CardImgOverlay>
+                </Link>
+            </Card>
+        );
+    }
  
-     function RenderMenuItem({dish, onClick}) {
-         return (
-             <Card>
-                 <CardImg width="100%" src={dish.image} alt={dish.name} />
-                 <CardImgOverlay>
-                     <CardTitle>{dish.name}</CardTitle>
-                 </CardImgOverlay>
-             </Card>
-         );
-     }
- 
-     const Menu = (props) => {
+    const Menu = (props) => {
  
          const menu = props.dishes.map((dish) => {
              return (
@@ -26,12 +29,23 @@
          });
  
          return (
-             <div className="container">
-                 <div className="row">
-                     {menu}
-                 </div>
-             </div>
-         );
-     }
+            <div className="container">
+                <div className="row">
+                    <Breadcrumb>
+                        <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
+                        <BreadcrumbItem active>Menu</BreadcrumbItem>
+                    </Breadcrumb>
+                    <div className="col-12">
+                        <h3>Menu</h3>
+                        <hr />
+                    </div>                
+                </div>
+                <div className="row">
+                    {menu}
+                </div>
+            </div>
+        );
+        
+    }
  
  export default Menu;
