@@ -1,14 +1,39 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import ReanderLeader from './ReanderLeaderComponent';
+//import ReanderLeader from './RenderLeaderComponent';
+
+
+const RenderLeader = (props) => {
+
+  console.log("Render Comments", props.leader);
+        if (props.leader!=null){
+          
+            return (
+              <Media>
+                  <Media left>
+                    <img src={props.leader.image} alt={props.leader.name} />
+                  </Media>
+                  <Media body>
+                    <Media heading>
+                      {props.leader.name}
+                    </Media>
+                    <span className="desination">{props.leader.designation}</span>
+                    <p>{props.leader.description}</p>
+                  </Media>
+            </Media>
+            );
+        }else{
+            return <div></div>;
+        };
+};
 
 function About(props) {
 
     const leaders = props.leaders.map((leader) => {
         return (
             <Media tag="li" key= {leader.id}>
-                <ReanderLeader leader= {leader} />
+                <RenderLeader leader= {leader} />
             </Media>
 
         );
