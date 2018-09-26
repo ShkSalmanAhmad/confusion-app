@@ -1,7 +1,8 @@
 import React from 'react';
 import { Card, CardImg, CardText, CardBody,
-        CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+        CardTitle, Breadcrumb, BreadcrumbItem, Button, Row, Col, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { Control, LocalForm, Errors } from 'react-redux-form';
 
 
 
@@ -9,7 +10,9 @@ import { Link } from 'react-router-dom';
  function RenderComments(props) {
         console.log("Render Comments: ", props.comments);
         const standardDateFormat = { year: 'numeric', month: 'short', day: '2-digit'};
-        
+        const style = {fontSize: "14px",
+                         marginRight: "3px"
+        };
         if (props.comments) {
             const dishComments = props.comments.map((comment) => {
                 return (
@@ -23,10 +26,15 @@ import { Link } from 'react-router-dom';
             });
             return (
                 <div  className="col-12 col-md-5 m-1">
-                <ul className="list-unstyled">
-                    <h4>Comments</h4>
-                    {dishComments}
-                </ul>                                     
+                    <ul className="list-unstyled">
+                        <h4>Comments</h4>
+                        {dishComments}
+                    </ul> 
+                     <LocalForm>
+                      <Button className="btn btn-outline-secondary" type="submit">
+                        <span className="fas fa-pencil"></span>Submit Comment
+                      </Button>
+                    </LocalForm>                                    
             </div>
             );
             
@@ -49,9 +57,9 @@ function RenderDish({dish}) {
                     </Card>
                 </div> 
             );
-        } else {
+        } else{
             return <div></div>;
-        }
+        };
         
  }
 

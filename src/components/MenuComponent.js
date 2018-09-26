@@ -2,7 +2,8 @@
  import React from 'react';
  import { Link } from 'react-router-dom';
  import { Card, CardImg, CardImgOverlay,
-    CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+    CardTitle, Breadcrumb, BreadcrumbItem, Button, Row, Col, Label} from 'reactstrap';
+ import { Control, LocalForm, Errors } from 'react-redux-form';
 
 
     function RenderMenuItem ({dish, onClick}) {
@@ -42,7 +43,9 @@
                 </div>
                 <div className="row">
                     {menu}
+                    
                 </div>
+            
             </div>
         );
         

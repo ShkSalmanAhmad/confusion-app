@@ -9,7 +9,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
 const isNumber = (val) => !isNaN(Number(val));
 const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
-class Contact extends Component {
+class CommentForm extends Component {
     constructor(props) {
         super(props);
 
@@ -33,7 +33,7 @@ class Contact extends Component {
                   
                 <div className="row row-content">
                    <div className="col-12">
-                      <h3>Send us your Feedback</h3>
+                      <h3>Submit Comment</h3>
                    </div>
                     <div className="col-12 col-md-9">
                        
@@ -172,4 +172,4 @@ class Contact extends Component {
 }
 
 
-export default Contact;
+export default CommentForm;

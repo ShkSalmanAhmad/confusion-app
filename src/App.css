@@ -38,3 +38,11 @@ address{
     margin-bottom: 10px;
     display: block;
 }
+.fa-pencil {
+    margin-right: 3px;
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
