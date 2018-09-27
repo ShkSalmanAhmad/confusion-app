@@ -12,12 +12,12 @@ const minLength = (len) => (val) => val && (val.length >= len);
 
 
 
- function RenderComments(props) {
-        console.log("Render Comments: ", props.comments);
+function RenderComments({comments, addComment, dishId}) {
+        console.log("Render Comments: ",comments);
         const standardDateFormat = { year: 'numeric', month: 'short', day: '2-digit'};
        
-        if (props.comments) {
-            const dishComments = props.comments.map((comment) => {
+        if (comments) {
+            const dishComments = comments.map((comment) => {
                 return (
                     <li key={comment.id}>        
                             <p>{comment.comment}</p>        
@@ -33,7 +33,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
                         <h4>Comments</h4>
                         {dishComments}
                     </ul> 
-                    <CommentForm />
+                    <CommentForm dishId={dishId} addComment={addComment} />
                                                 
             </div>
             );
@@ -64,9 +64,11 @@ class CommentForm extends Component {
 
 
     handleSubmit(values) {
-        console.log('Current State is: ' + JSON.stringify(values));
-        alert('Current State is: ' + JSON.stringify(values));
+       // console.log('Current State is: ' + JSON.stringify(values));
+        //alert('Current State is: ' + JSON.stringify(values));
         // event.preventDefault();
+        this.toggleModal();
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
      
@@ -121,10 +123,10 @@ class CommentForm extends Component {
                             </Row>
                                                         
                             <Row className="form-group">
-                                <Label htmlFor="message" md={2}>Your Feedback</Label>
+                                <Label htmlFor="comment" md={2}>Your Feedback</Label>
                                 <Col md={10}>
-                                    <Control.textarea model=".message" id="message" name="message"
-                                        rows="6"
+                                    <Control.textarea model=".comment" id="comment" name="comment"
+                                        rows="5"
                                         className="form-control" />
                                 </Col>
                             </Row>
@@ -181,7 +183,12 @@ const  DishDetail = (props) => {
                 </div>
                 <div className="row">
                     <RenderDish dish={props.dish} />
-                    <RenderComments comments={props.comments} />   
+                                    
+                    <RenderComments comments={props.comments}
+                        addComment={props.addComment}
+                        dishId={props.dish.id}
+                    />
+
                 </div>
             </div>
         );
