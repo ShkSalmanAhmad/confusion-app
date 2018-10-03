@@ -25,7 +25,7 @@ const RenderLeader = (props) => {
             );
         }else{
             return <div></div>;
-        };
+        }
 };
 
 function About(props) {

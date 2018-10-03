@@ -8,7 +8,6 @@ import Contact from './ContactComponent';
 import About from './AboutComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { addComment } from '../redux/ActionCreators';
 import { addComment, fetchDishes } from '../redux/ActionCreators';
 
 
@@ -23,7 +22,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   
-  addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment))
+  addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)),
   fetchDishes: () => { dispatch(fetchDishes())}
 });
 
@@ -32,11 +31,7 @@ const mapDispatchToProps = dispatch => ({
 
 
 class Main extends Component {
-  constructor(props){
-    super(props);
-  }
-
-
+  
   componentDidMount() {
     this.props.fetchDishes();
   }

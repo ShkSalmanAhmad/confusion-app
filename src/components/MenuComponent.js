@@ -2,8 +2,7 @@
  import React from 'react';
  import { Link } from 'react-router-dom';
  import { Card, CardImg, CardImgOverlay,
-    CardTitle, Breadcrumb, BreadcrumbItem, Button, Row, Col, Label} from 'reactstrap';
- import { Control, LocalForm, Errors } from 'react-redux-form';
+    CardTitle, Breadcrumb, BreadcrumbItem} from 'reactstrap';
  import { Loading } from './LoadingComponent';
 
 
@@ -64,8 +63,7 @@
                     </div>                
                 </div>
                 <div className="row">
-                    {menu}
-                    
+                    {menu}   
                 </div>
             
             </div>
