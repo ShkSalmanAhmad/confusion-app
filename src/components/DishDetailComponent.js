@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 //import RenderDish from './RenderDishComponent';
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -18,25 +19,27 @@ function RenderComments({comments, postComment, dishId}) {
         const standardDateFormat = { year: 'numeric', month: 'short', day: '2-digit'};
        
         if (comments) {
-            const dishComments = comments.map((comment) => {
-                return (
-                    <li key={comment.id}>        
-                            <p>{comment.comment}</p>        
-                            <p>-- {comment.author},
-                            {new Intl.DateTimeFormat('en-US',
-                             standardDateFormat).format( new Date(Date.parse(comment.date)))} </p>        
-                    </li>     
-               );
-            });
             return (
                 <div  className="col-12 col-md-5 m-1">
                     <ul className="list-unstyled">
                         <h4>Comments</h4>
-                        {dishComments}
+                        
+                            <Stagger in>
+                                {comments.map((comment) => {
+                                    return (
+                                        <Fade in>
+                                        <li key={comment.id}>
+                                        <p>{comment.comment}</p>
+                                        <p>-- {comment.author} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
+                                        </li>
+                                        </Fade>
+                                    );
+                                })}
+                            </Stagger>
                     </ul> 
                     <CommentForm dishId={dishId} postComment={postComment} />
                                                 
-            </div>
+                 </div>
             );
             
         } else {
@@ -152,15 +155,19 @@ class CommentForm extends Component {
 function RenderDish({dish}) {
     if (dish) { 
         return (
-            <div  className="col-12 col-md-5 m-1">
-                <Card>
-                    <CardImg top src={baseUrl + dish.image} alt={dish.name} />
-                    <CardBody>
+            <FadeTransform
+                in
+                transformProps={{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+                }}>
+            <Card>
+                <CardImg top src={baseUrl + dish.image} alt={dish.name} />
+                <CardBody>
                     <CardTitle>{dish.name}</CardTitle>
                     <CardText>{dish.description}</CardText>
-                    </CardBody>
-                </Card>
-            </div> 
+                </CardBody>
+            </Card>
+            </FadeTransform>
         );
     } else{
         return <div></div>;
