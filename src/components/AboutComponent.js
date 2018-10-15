@@ -2,20 +2,10 @@ import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { baseUrl } from '../shared/baseUrl';
+import { Loading } from './LoadingComponent';
 
-const RenderLeader = ({item, isLoading, errMess}) => {
+const RenderLeader = ({item}) => {
 
-    if (isLoading) {
-        return(
-                <Loading />
-        );
-    }
-    else if (errMess) {
-        return(
-                <h4>{errMess}</h4>
-        );
-    }
-    else if (item){
             return (
               <Media>
                   <Media left>
@@ -30,12 +20,10 @@ const RenderLeader = ({item, isLoading, errMess}) => {
                   </Media>
             </Media>
             );
-        }else{
-            return <div></div>;
-        }
+
 };
 
-function About({leaders}) {
+function About({leaders, isLoading, errMess}) {
 
     const Leaders = leaders.map((leader) => {
         return (
@@ -45,8 +33,18 @@ function About({leaders}) {
 
         );
     });
-
-    return(
+    if (isLoading) {
+        return(
+                <Loading />
+        );
+    }
+    else if (errMess) {
+        return(
+                <h4>{errMess}</h4>
+        );
+    }
+    else {
+      return(
         <div className="container">
             <div className="row">
                 <Breadcrumb>
@@ -107,7 +105,8 @@ function About({leaders}) {
                 </div>
             </div>
         </div>
-    );
+       );
+    }
 }
 
 export default About;    
