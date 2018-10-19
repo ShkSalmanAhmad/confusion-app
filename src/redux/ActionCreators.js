@@ -27,7 +27,7 @@ export const postFeedback = (firstname, lastname, telnum, email, agree, contactT
         credentials: "same-origin"
    };
 
-    return fetch(url,opt)
+   return fetch(url, opt)
     .then(response => {
         if (response.ok) {
           return response;
