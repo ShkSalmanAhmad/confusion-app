@@ -8,6 +8,7 @@ import logger from 'redux-logger';
 import { createForms } from 'react-redux-form';
 
 import { InitialFeedback } from './forms';
+import { FeedBack } from './feedback';
  
 
 export const ConfigureStore = () => {
@@ -20,7 +21,8 @@ export const ConfigureStore = () => {
             leaders: Leaders,
             ...createForms({
                 feedback: InitialFeedback
-            })
+            }),
+           feedback: FeedBack
         }),
         applyMiddleware(thunk, logger)
     );

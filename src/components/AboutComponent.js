@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { baseUrl } from '../shared/baseUrl';
 import { Loading } from './LoadingComponent';
 
+
 const RenderLeader = ({item}) => {
 
             return (
@@ -18,29 +19,24 @@ const RenderLeader = ({item}) => {
                     <span className="desination">{item.designation}</span>
                     <p>{item.description}</p>
                   </Media>
-            </Media>
+              </Media>
             );
 
 };
 
-function About({leaders, isLoading, errMess}) {
+function About(props) {
+    console.log('Fetch leaders :',props.leaders);
 
-    const Leaders = leaders.map((leader) => {
-        return (
-            <Media tag="li" key= {leader.id}>
-                <RenderLeader item= {leader} />
-            </Media>
+         
 
-        );
-    });
-    if (isLoading) {
+    if (props.isLoading) {
         return(
                 <Loading />
         );
     }
-    else if (errMess) {
+    else if (props.errMess) {
         return(
-                <h4>{errMess}</h4>
+                <h4>{props.errMess}</h4>
         );
     }
     else {
@@ -100,7 +96,13 @@ function About({leaders, isLoading, errMess}) {
                 </div>
                 <div className="col-12">
                     <Media list>
-                        {Leaders}
+                        {props.leaders.leaders.map((leader) => {
+                                return (
+                                    <Media tag="li" key= {leader.id}>
+                                        <RenderLeader item= {leader} />
+                                    </Media>
+                                );
+                            })}
                     </Media>
                 </div>
             </div>

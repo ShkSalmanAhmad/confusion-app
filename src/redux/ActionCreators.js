@@ -2,7 +2,53 @@ import * as ActionTypes from './ActionTypes';
 import { DISHES } from '../shared/dishes';
 import { baseUrl } from '../shared/baseUrl';
 
+export const addFeedback = (feedback) => ({
+    type: ActionTypes.ADD_FEEDBACK,
+    payload: feedback
+});
+export const postFeedback = (firstname, lastname, telnum, email, agree, contactType, message) => (dispatch) => {
 
+    const newfeedBack = {
+        firstname: firstname,
+        lastname: lastname,
+        telnum: telnum,
+        email:email,
+        agree: agree,
+        contactType: contactType,
+        message: message
+    };
+    const url = baseUrl + 'feedback';
+    const opt = {
+        method: "POST",
+        body: JSON.stringify(newfeedBack),
+        headers: {
+        "Content-Type": "application/json"
+        },
+        credentials: "same-origin"
+   };
+
+    return fetch(url,opt)
+    .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+      })
+    .then(response => response.json())
+    .then(response => dispatch(addFeedback(response)))
+    .catch(error =>   console.log('feedback errors', error.message));
+}
+export const feedbackFailed = (errmess) => ({
+    type: ActionTypes.FEEDBACK_FAILED,
+    payload: errmess
+});
 export const fetchLeaders = () => (dispatch) => {
 
     dispatch(leadersLoading(true));
